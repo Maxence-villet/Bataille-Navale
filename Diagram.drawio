@@ -287,7 +287,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="h6J5cPIz5XmJw4J2zHC2-10" value="Game" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="-300" y="-460" width="400" height="190" as="geometry" />
+          <mxGeometry x="-300" y="-460" width="400" height="210" as="geometry" />
         </mxCell>
         <mxCell id="h6J5cPIz5XmJw4J2zHC2-11" value="- ID: String&lt;div&gt;- gameplay: Gameplay&lt;/div&gt;&lt;div&gt;- score: Array[int, int]&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="h6J5cPIz5XmJw4J2zHC2-10">
           <mxGeometry y="26" width="400" height="84" as="geometry" />
@@ -295,8 +295,8 @@
         <mxCell id="h6J5cPIz5XmJw4J2zHC2-12" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="h6J5cPIz5XmJw4J2zHC2-10">
           <mxGeometry y="110" width="400" height="8" as="geometry" />
         </mxCell>
-        <mxCell id="h6J5cPIz5XmJw4J2zHC2-13" value="+ Game(String ID=&quot;&quot;, Gameplay gameplay, Array[int][int] score=[0, 0])" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="h6J5cPIz5XmJw4J2zHC2-10">
-          <mxGeometry y="118" width="400" height="72" as="geometry" />
+        <mxCell id="h6J5cPIz5XmJw4J2zHC2-13" value="+ Game(String ID=&quot;&quot;, Gameplay gameplay, Array[int][int] score=[0, 0])&lt;div&gt;+ SetScore(Array[int, int]) -&amp;gt; void&lt;/div&gt;&lt;div&gt;+ GetScore() -&amp;gt; Array[int, int]&lt;/div&gt;&lt;div&gt;+ DisplayScore()&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="h6J5cPIz5XmJw4J2zHC2-10">
+          <mxGeometry y="118" width="400" height="92" as="geometry" />
         </mxCell>
         <mxCell id="h6J5cPIz5XmJw4J2zHC2-14" value="" style="endArrow=none;html=1;rounded=0;entryX=0.51;entryY=0.989;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="o-7l8mMZjJyNIivP5UZl-72" target="h6J5cPIz5XmJw4J2zHC2-13">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
