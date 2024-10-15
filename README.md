@@ -13,3 +13,7 @@ Rappel des règles:
 - Chaque joueur attaque une case de la grille adverse à tour de rôle.
 
 Objectif : Couler tous les bateaux de l’adversaire en touchant toutes les cases de chaque bateau.
+
+[images/grid-size-10.png](https://github.com/Maxence-villet/Bataille-Navale/blob/main/images/grid-size-10.png)
+
+[images/grid-size-10.png](https://github.com/Maxence-villet/Bataille-Navale/blob/main/images/grid-size-15.png)
