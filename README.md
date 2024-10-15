@@ -16,4 +16,5 @@ Objectif : Couler tous les bateaux de l’adversaire en touchant toutes les case
 
 ## Taille ajustable
 ![alt text](https://github.com/Maxence-villet/Bataille-Navale/blob/main/images/grid-size-10.png)    ![alt text](https://github.com/Maxence-villet/Bataille-Navale/blob/main/images/grid-size-15.png)
-10 x 10            15 x 15
+
+10 x 10                                                                                                                15 x 15
