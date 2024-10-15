@@ -19,7 +19,7 @@ Objectif : Couler tous les bateaux de l’adversaire en touchant toutes les case
 La taille de la grille est ajustable, elle s'ajuste parfaitement grace à la variable size:
 ```
     // grid.py
-    self.size = 10
+    self.size = 10 // Par défaut: 10
 ```
 
 ![alt text](https://github.com/Maxence-villet/Bataille-Navale/blob/main/images/grid-size-10.png)    ![alt text](https://github.com/Maxence-villet/Bataille-Navale/blob/main/images/grid-size-15.png) ![alt text](https://github.com/Maxence-villet/Bataille-Navale/blob/main/images/grid-size-4.png)
