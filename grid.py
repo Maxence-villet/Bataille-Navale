@@ -11,7 +11,7 @@ class Grid:
         --------
             None
         """
-        self.size = 15
+        self.size = 4
         self.data = [[0 for _ in range(self.size)] for _ in range(self.size)]  # Initialisation de la grille dans le constructeur
 
     def display_grid(self):
