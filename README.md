@@ -22,4 +22,4 @@ La taille de la grille est ajustable, elle s'ajuste parfaitement grace à la var
     self.size = 10
 ```
 
-![alt text](https://github.com/Maxence-villet/Bataille-Navale/blob/main/images/grid-size-10.png)    ![alt text](https://github.com/Maxence-villet/Bataille-Navale/blob/main/images/grid-size-15.png)
+![alt text](https://github.com/Maxence-villet/Bataille-Navale/blob/main/images/grid-size-10.png)    ![alt text](https://github.com/Maxence-villet/Bataille-Navale/blob/main/images/grid-size-15.png) ![alt text](https://github.com/Maxence-villet/Bataille-Navale/blob/main/images/grid-size-4.png)
