@@ -2,6 +2,17 @@ from grid import Grid;
 
 class Player:
     def __init__(self):
+        """
+        Constructeur de la classe Grid.
+
+        Paramètres:
+        -----------
+            None
+
+        Retourne:
+        --------
+            None
+        """
         self.g = Grid(10)
         self.ships_type = self.g.get_ships
         self.types_bateaux = list(self.g.ship_sizes.keys())
@@ -9,8 +20,17 @@ class Player:
 
 
     def set_ship(self):
-        
-        print(self.types_bateaux)
+        """
+        Permet au joueur de placer les bateaux.
+
+        Paramètres:
+        -----------
+            None
+
+        Retourne:
+        ---------
+            bool: False si la position est invalide
+        """
 
         # Boucle pour placer tous les bateaux
 
@@ -40,3 +60,27 @@ class Player:
     print("Tous les bateaux ont été placés !")
 
 
+    def attack_enemie(self, enemy_grid:Grid):
+        """
+        Permet au joueur d'attaquer la grille adverse.
+
+        Paramètres:
+        -----------
+            enemy_grid (Grid): La grille de l'adversaire.
+
+        Retourne:
+        ---------
+            bool: True si un bateau a été touché, False sinon.
+        """
+        row = int(input("Entrez la ligne (numéro) : "))
+        col_alpha = input("Entrez la colonne (lettre) : ")
+        
+        col = self.g.convert_alphabet_to_int(col_alpha)
+        resultat:str
+
+        if enemy_grid.data[row-1][col] == 1:
+            print("Touché !")
+            print(enemy_grid.data[row-1][col])
+            enemy_grid.data[row-1][col] = 2
+        else:
+            print("Dans l'eau...")

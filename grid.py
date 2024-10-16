@@ -5,7 +5,7 @@ class Grid:
 
         Paramètres:
         -----------
-            None
+            size (int): la taille de la grille.
 
         Retourne:
         --------
@@ -47,6 +47,30 @@ class Grid:
                 print(cell, end=" ")
             print()
             i+=1 # Incrémentation des colonnes
+
+    def convert_alphabet_to_int(self, col_alpha):
+        """
+        Permet de convertir les lettres de l'axe des colonnes en int.
+
+        Paramètres:
+        -----------
+            col_aplha (string): la lettre correspondant à la colonne.
+
+        Retourne:
+        ---------
+            int: retourne le nombre de la colonne.
+        """
+        col:int
+        isContain = False
+        for i in range(0, len(self.alphabet)):
+             if col_alpha == self.alphabet[i]:
+                 col = i
+                 return col
+             else:
+                 continue
+        if isContain == False:
+            return False
+        
 
     def set_ship_size(self, ship_type):
         """
@@ -141,4 +165,5 @@ class Grid:
             Hashmap: la liste des bateaux
         """
         return self.ship_sizes
+    
     
