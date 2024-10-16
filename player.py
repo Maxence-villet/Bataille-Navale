@@ -81,11 +81,11 @@ class Player:
             if type(col_alpha) == str:
                 col_alpha = col_alpha.upper()
                 isContainLetter = False
-                for i in self.g.alphabet[0:self.g.size:1][::self.g.size]:
+                for i in self.g.alphabet[0:self.g.size:1]:
                     if isContainLetter == False:
                         if col_alpha == i:
                             isContainLetter = True
-                
+
                 if isContainLetter == False:
                     print(f"Vous devez mettre une seule lettre parmi ces lettres : {self.g.alphabet[0:self.g.size:1]}")
                     return "ERROR"
@@ -102,10 +102,10 @@ class Player:
                     return "Touché"
                 else:
                     self.g.data_used[row-1][col] = self.g.data_used[row-1][col] + 2
-                    return "ERROR"
+                    return "coulé"
             else: #vérification colonne (str)
                 print(f"Vous devez mettre une seule lettre parmi ces lettres : {self.g.alphabet[0:self.g.size:1]}")
-                return False
+                return "ERROR"
         else: #vérification ligne (int)
             print(f"Vous devez mettre un nombre entre 1 et {self.g.size}")
             return "ERROR"

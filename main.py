@@ -14,28 +14,28 @@ def main():
         
         os.system('cls||clear')
         print("Joueur 1 \n\n   Grille du Joueur 1 \n-----------------------")
-        #player1.g.place_ship('contre-torpilleur', 1, 'A', 'V')
-        #player1.g.place_ship('croiseur', 1, 'B', 'V')
-        #player1.g.place_ship('porte-avions', 1, 'C', 'V')
-        #player1.g.place_ship('torpilleur', 1, 'D', 'V')
-        #player1.g.place_ship('sous-marin', 1, 'E', 'V')
-        player1.g.display_grid(player1.g.data)
-        #break
-        player1.set_ship()
-        time.sleep(2)
+        player1.g.place_ship('contre-torpilleur', 1, 'A', 'V')
+        player1.g.place_ship('croiseur', 1, 'B', 'V')
+        player1.g.place_ship('porte-avions', 1, 'C', 'V')
+        player1.g.place_ship('torpilleur', 1, 'D', 'V')
+        player1.g.place_ship('sous-marin', 1, 'E', 'V')
+        #player1.g.display_grid(player1.g.data)
+        break
+        #player1.set_ship()
+        #time.sleep(2)
 
     while player2.types_bateaux:
         os.system('cls||clear')
         print("Joueur 2 \n\n   Grille du Joueur 2 \n-----------------------")
-        #player2.g.place_ship('contre-torpilleur', 1, 'A', 'V')
-        #player2.g.place_ship('croiseur', 2, 'A', 'V')
-        #player2.g.place_ship('porte-avions', 3, 'A', 'V')
-        #player2.g.place_ship('torpilleur', 4, 'A', 'V')
-        #player2.g.place_ship('sous-marin', 5, 'A', 'V')
+        player2.g.place_ship('contre-torpilleur', 1, 'A', 'V')
+        player2.g.place_ship('croiseur', 2, 'A', 'V')
+        player2.g.place_ship('porte-avions', 3, 'A', 'V')
+        player2.g.place_ship('torpilleur', 4, 'A', 'V')
+        player2.g.place_ship('sous-marin', 5, 'A', 'V')
         player2.g.display_grid(player2.g.data)
-        #break
-        player2.set_ship() 
-        time.sleep(2)  
+        break
+        #player2.set_ship() 
+        #time.sleep(2)  
 
     player_placement = 1
     while True:
@@ -49,6 +49,7 @@ def main():
             player1.g.display_grid(player2.g.data_used)
             print("-----------------------")
             status = player2.attack_enemie(player1.g)
+            print(status)
             if(status == "AGAIN"):
                 continue
             elif(status == "coulé"):
@@ -65,7 +66,6 @@ def main():
                 continue
             
             win = player1.win_check(player2.g)
-            print(win)
             if win:
                 print(f"{player1.name} a gagné")
                 break
