@@ -1,7 +1,7 @@
 from grid import Grid;
 
 class Player:
-    def __init__(self):
+    def __init__(self, name):
         """
         Constructeur de la classe Grid.
 
@@ -16,6 +16,7 @@ class Player:
         self.g = Grid(10)
         self.ships_type = self.g.get_ships
         self.types_bateaux = list(self.g.ship_sizes.keys())
+        self.name = name
 
 
 
@@ -70,17 +71,42 @@ class Player:
 
         Retourne:
         ---------
-            bool: True si un bateau a été touché, False sinon.
+            string: "Touché" si un bateau a été touché, "coulé" si l'eau est touché et "AGAIN" si le tir est invalid.
         """
         row = int(input("Entrez la ligne (numéro) : "))
         col_alpha = input("Entrez la colonne (lettre) : ")
         
         col = self.g.convert_alphabet_to_int(col_alpha)
-        resultat:str
+        
+        if self.g.data_used[row-1][col] + 1 == enemy_grid.data[row-1][col] and enemy_grid.data[row-1][col] > 1:
+                return "AGAIN"
+        else:
+            self.g.data_used[row-1][col] = enemy_grid.data[row-1][col]
 
         if enemy_grid.data[row-1][col] == 1:
-            print("Touché !")
-            print(enemy_grid.data[row-1][col])
-            enemy_grid.data[row-1][col] = 2
+            self.g.data_used[row-1][col] = self.g.data_used[row-1][col]
+            return "Touché"
         else:
-            print("Dans l'eau...")
+            self.g.data_used[row-1][col] = self.g.data_used[row-1][col] + 2
+            return "coulé"
+    
+    def win_check(self, enemy_grid:Grid):
+        """
+        Vérification de victoire.
+
+        Paramètres:
+        -----------
+            enemy_grid (Grid): La grille de l'adversaire.
+
+        Retourne:
+            bool: True si la partie est gagné, False si la partie continue.
+        ---------
+            
+        """
+        for i in enemy_grid.data:
+            for j in i:
+                if j == 1:
+                    return False
+        return True
+
+
