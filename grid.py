@@ -16,6 +16,7 @@ class Grid:
         self.ship_sizes = {'porte-avions': 5, 'croiseur': 4, 'contre-torpilleur': 3, 'sous-marin': 3, 'torpilleur': 2} # Dictionnaire pour associer chaque type de bateau à sa taille
         self.placed_ships = []
         self.alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    
     def display_grid(self):
         """
         Affiche la grille à l'écran.
