@@ -61,6 +61,7 @@ class Grid:
         ---------
             int: retourne le nombre de la colonne.
         """
+        self.alphabet = self.alphabet.upper()
         col:int
         isContain = False
         for i in range(0, len(self.alphabet)):
@@ -111,47 +112,67 @@ class Grid:
         ---------
             True si le placement est valide, False sinon.
         """
-        row-=1
+        if type(row) == int and row <= self.size and row > 0:  
+            if type(col_alpha) == str:
+                
+                isContainLetter = False
+                for i in self.alphabet:
+                    if isContainLetter == False:
+                        if col_alpha == i:
+                            isContainLetter = True
+                
+                if isContainLetter == False:
+                    print(f"Vous devez mettre une seule lettre parmi ces lettres : {self.alphabet[0:self.size:1]}")
+                    return False
+                row-=1
 
-        col:int
-        isContain = False
-        for i in range(0, len(self.alphabet)):
-             if col_alpha == self.alphabet[i]:
-                 col = i
-                 isContain = True
-             else:
-                 continue
-        if isContain == False:
+                col:int
+                isContain = False
+                for i in range(0, len(self.alphabet)):
+                    if col_alpha == self.alphabet[i]:
+                        col = i
+                        isContain = True
+                    else:
+                        continue
+                if isContain == False:
+                    return False
+
+                # Récupérer la taille du bateau
+                ship_size = self.ship_sizes[ship_type]
+
+                # Vérifier si le placement est valide
+                if orientation == 'H':
+                    if col + ship_size > self.size:
+                        return False  # Le bateau dépasse de la grille
+                    for i in range(ship_size):
+                        if self.data[row][col + i] != 0:
+                            return False  # Il y a déjà un bateau à cet endroit
+                else:
+                    if row + ship_size > self.size:
+                        return False  # Le bateau dépasse de la grille
+                    for i in range(ship_size):
+                        if self.data[row + i][col] != 0:
+                            return False  # Il y a déjà un bateau à cet endroit
+
+                # Si le placement est valide, mettre à jour la grille
+                if orientation == 'H':
+                    self.set_ship_size(ship_type)
+                    for i in range(ship_size):
+                        self.data[row][col + i] = 1  # 1 représente une case occupée par un bateau
+                else:
+                    self.set_ship_size(ship_type)
+                    for i in range(ship_size):
+                        self.data[row + i][col] = 1
+
+                return True
+            else: #vérification col
+                print(f"Vous devez mettre une seule lettre parmi ces lettres : {self.alphabet[0:self.size:1]}")
+                return False
+        else: #vérification row
+            print(f"Vous devez mettre un nombre entre 1 et {self.size}")
             return False
 
-        # Récupérer la taille du bateau
-        ship_size = self.ship_sizes[ship_type]
-
-        # Vérifier si le placement est valide
-        if orientation == 'H':
-            if col + ship_size > self.size:
-                return False  # Le bateau dépasse de la grille
-            for i in range(ship_size):
-                if self.data[row][col + i] != 0:
-                    return False  # Il y a déjà un bateau à cet endroit
-        else:
-            if row + ship_size > self.size:
-                return False  # Le bateau dépasse de la grille
-            for i in range(ship_size):
-                if self.data[row + i][col] != 0:
-                    return False  # Il y a déjà un bateau à cet endroit
-
-        # Si le placement est valide, mettre à jour la grille
-        if orientation == 'H':
-            self.set_ship_size(ship_type)
-            for i in range(ship_size):
-                self.data[row][col + i] = 1  # 1 représente une case occupée par un bateau
-        else:
-            self.set_ship_size(ship_type)
-            for i in range(ship_size):
-                self.data[row + i][col] = 1
-
-        return True
+        
     
     def get_ships(self):
         """

@@ -75,20 +75,40 @@ class Player:
         """
         row = int(input("Entrez la ligne (numéro) : "))
         col_alpha = input("Entrez la colonne (lettre) : ")
-        
-        col = self.g.convert_alphabet_to_int(col_alpha)
-        
-        if self.g.data_used[row-1][col] + 1 == enemy_grid.data[row-1][col] and enemy_grid.data[row-1][col] > 1:
-                return "AGAIN"
-        else:
-            self.g.data_used[row-1][col] = enemy_grid.data[row-1][col]
 
-        if enemy_grid.data[row-1][col] == 1:
-            self.g.data_used[row-1][col] = self.g.data_used[row-1][col]
-            return "Touché"
-        else:
-            self.g.data_used[row-1][col] = self.g.data_used[row-1][col] + 2
-            return "coulé"
+        
+        if type(row) == int and row <= self.g.size and row > 0:  
+            if type(col_alpha) == str:
+                col_alpha = col_alpha.upper()
+                isContainLetter = False
+                for i in self.g.alphabet[0:self.g.size:1][::self.g.size]:
+                    if isContainLetter == False:
+                        if col_alpha == i:
+                            isContainLetter = True
+                
+                if isContainLetter == False:
+                    print(f"Vous devez mettre une seule lettre parmi ces lettres : {self.g.alphabet[0:self.g.size:1]}")
+                    return "ERROR"
+        
+                col = self.g.convert_alphabet_to_int(col_alpha)
+                
+                if self.g.data_used[row-1][col] > 0:
+                        return "AGAIN"
+                else:
+                    self.g.data_used[row-1][col] = enemy_grid.data[row-1][col]
+
+                if enemy_grid.data[row-1][col] == 1:
+                    self.g.data_used[row-1][col] = self.g.data_used[row-1][col]
+                    return "Touché"
+                else:
+                    self.g.data_used[row-1][col] = self.g.data_used[row-1][col] + 2
+                    return "ERROR"
+            else: #vérification colonne (str)
+                print(f"Vous devez mettre une seule lettre parmi ces lettres : {self.g.alphabet[0:self.g.size:1]}")
+                return False
+        else: #vérification ligne (int)
+            print(f"Vous devez mettre un nombre entre 1 et {self.g.size}")
+            return "ERROR"
     
     def win_check(self, enemy_grid:Grid):
         """
