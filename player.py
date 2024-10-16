@@ -1,4 +1,5 @@
 from grid import Grid;
+import random
 
 class Player:
     def __init__(self, name):
@@ -129,4 +130,40 @@ class Player:
                     return False
         return True
 
+    def set_ship_ai(self):
+        """
+        Permet a l'AI de placer les bateaux.
+
+        Paramètres:
+        -----------
+            None
+
+        Retourne:
+        ---------
+            bool: False si la position est invalide
+        """
+        # Demander les coordonnées et l'orientation du bateau
+        ligne = random.randint(1, self.g.size)
+        colonne = random.randint(1, self.g.size)
+        orientation_random = random.randint(0, 2)
+        self.types_bateaux = list(self.g.ship_sizes.keys())
+        orientation = ''
+        print(len(self.types_bateaux))
+        type_bateau = self.types_bateaux[random.randint(0, len(self.types_bateaux)-1)]
+        print(ligne)
+        print(colonne)
+        print(orientation_random)
+        print(type_bateau)
+        if orientation_random == 0:
+            orientation = 'V'
+        else:
+            orientation = 'H'
+        # Appeler la fonction place_ship() pour placer le bateau
+        if self.g.place_ship(type_bateau, ligne, self.g.alphabet[colonne-1], orientation):
+            # Si le placement est réussi, retirer le type de bateau de la liste
+            self.types_bateaux.remove(type_bateau)
+        else:
+            print("Placement impossible. Veuillez réessayer.")
+
+    print("Tous les bateaux ont été placés !")
 

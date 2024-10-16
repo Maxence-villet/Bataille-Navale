@@ -8,6 +8,10 @@ def main():
     #g.place_ship('contre-torpilleur', 9, 2, 'V')
     player1 = Player("Player 1")
     player2 = Player("Player 2")
+    player3 = Player("Player 3")
+
+    player3.set_ship_ai()
+    print(player3.g.data)
 
     
     while player1.types_bateaux:
