@@ -11,13 +11,14 @@ class Player:
             None
 
         Retourne:
-        --------
+        ---------
             None
         """
         self.g = Grid(10)
         self.ships_type = self.g.get_ships
         self.types_bateaux = list(self.g.ship_sizes.keys())
         self.name = name
+        self.placed_ships = []
 
 
 
@@ -62,7 +63,7 @@ class Player:
     print("Tous les bateaux ont été placés !")
 
 
-    def attack_enemie(self, enemy_grid:Grid):
+    def attack_enemie(self, enemy_grid:Grid, enemie_type):
         """
         Permet au joueur d'attaquer la grille adverse.
 
@@ -74,39 +75,45 @@ class Player:
         ---------
             string: "Touché" si un bateau a été touché, "coulé" si l'eau est touché et "AGAIN" si le tir est invalid.
         """
-        row = int(input("Entrez la ligne (numéro) : "))
-        col_alpha = input("Entrez la colonne (lettre) : ")
+        if enemie_type == 1:
+            row = int(input("Entrez la ligne (numéro) : "))
+            col_alpha = input("Entrez la colonne (lettre) : ")
+            
 
-        
-        if type(row) == int and row <= self.g.size and row > 0:  
-            if type(col_alpha) == str:
+
+            if type(col_alpha) == str: # vérification du type string
                 col_alpha = col_alpha.upper()
                 isContainLetter = False
                 for i in self.g.alphabet[0:self.g.size:1]:
                     if isContainLetter == False:
                         if col_alpha == i:
                             isContainLetter = True
-
                 if isContainLetter == False:
                     print(f"Vous devez mettre une seule lettre parmi ces lettres : {self.g.alphabet[0:self.g.size:1]}")
                     return "ERROR"
-        
-                col = self.g.convert_alphabet_to_int(col_alpha)
-                
-                if self.g.data_used[row-1][col] > 0:
-                        return "AGAIN"
                 else:
-                    self.g.data_used[row-1][col] = enemy_grid.data[row-1][col]
+                    col = self.g.convert_alphabet_to_int(col_alpha)
+        else:
+            row = random.randint(1, self.g.size)
+            col = random.randint(1, self.g.size)
 
-                if enemy_grid.data[row-1][col] == 1:
-                    self.g.data_used[row-1][col] = self.g.data_used[row-1][col]
-                    return "Touché"
-                else:
-                    self.g.data_used[row-1][col] = self.g.data_used[row-1][col] + 2
-                    return "coulé"
-            else: #vérification colonne (str)
-                print(f"Vous devez mettre une seule lettre parmi ces lettres : {self.g.alphabet[0:self.g.size:1]}")
-                return "ERROR"
+            col -= 1
+            row -= 2
+        
+        if type(row) == int and row <= self.g.size:   # vérification nombre compris entre 1 et la size de la grille
+
+
+            if self.g.data_used[row][col] > 0: # case déjà touchée
+                    return "AGAIN"
+            else:
+                self.g.data_used[row][col] = enemy_grid.data[row][col] # ajouter un point dans la case cachée
+
+            if enemy_grid.data[row][col] == 1: # bateau touchée
+                self.g.data_used[row][col] = self.g.data_used[row][col]
+                return "Touché"
+            else:
+                self.g.data_used[row][col] = self.g.data_used[row][col] + 2 # tir dans l'eau
+                return "coulé"
         else: #vérification ligne (int)
             print(f"Vous devez mettre un nombre entre 1 et {self.g.size}")
             return "ERROR"
@@ -126,44 +133,51 @@ class Player:
         """
         for i in enemy_grid.data:
             for j in i:
-                if j == 1:
+                if j == 1: # 1 signifie le ship
                     return False
-        return True
+        return True # Gagné
 
     def set_ship_ai(self):
         """
-        Permet a l'AI de placer les bateaux.
+        Place aléatoirement les bateaux sur la grille.
 
-        Paramètres:
-        -----------
-            None
+        Args:
+            self: Instance de la classe contenant la grille.
 
-        Retourne:
-        ---------
-            bool: False si la position est invalide
+        Returns:
+            bool: True si tous les bateaux ont été placés avec succès.
         """
-        # Demander les coordonnées et l'orientation du bateau
-        ligne = random.randint(1, self.g.size)
-        colonne = random.randint(1, self.g.size)
-        orientation_random = random.randint(0, 2)
         self.types_bateaux = list(self.g.ship_sizes.keys())
-        orientation = ''
-        print(len(self.types_bateaux))
-        type_bateau = self.types_bateaux[random.randint(0, len(self.types_bateaux)-1)]
-        print(ligne)
-        print(colonne)
-        print(orientation_random)
-        print(type_bateau)
-        if orientation_random == 0:
-            orientation = 'V'
-        else:
-            orientation = 'H'
-        # Appeler la fonction place_ship() pour placer le bateau
-        if self.g.place_ship(type_bateau, ligne, self.g.alphabet[colonne-1], orientation):
-            # Si le placement est réussi, retirer le type de bateau de la liste
-            self.types_bateaux.remove(type_bateau)
-        else:
-            print("Placement impossible. Veuillez réessayer.")
 
-    print("Tous les bateaux ont été placés !")
+        # Liste des types de bateaux (à partir des clés du dictionnaire)
+        types_bateaux = list(self.g.ship_sizes.keys())
 
+        # Boucle pour placer tous les bateaux
+        while types_bateaux:
+            # Afficher les types de bateaux restants à placer
+            print("Bateaux restants à placer :", types_bateaux)
+
+            # Demander au joueur de choisir un type de bateau
+            type_bateau = random.choice(list(self.g.ship_sizes.keys()))
+
+            # Vérifier si le type de bateau est valide
+            if type_bateau not in types_bateaux:
+                print("Type de bateau invalide. Veuillez réessayer.")
+                continue
+
+            # Récupérer la taille du bateau à partir du dictionnaire
+            taille_bateau = random.choice(list(self.g.ship_sizes.keys()))
+
+            # Demander les coordonnées et l'orientation du bateau
+            ligne = random.randint(1, self.g.size)
+            colonne = random.randint(0, self.g.size-1)
+            orientation = random.choice(['V', 'H'])
+
+            # Appeler la fonction place_ship() en passant la taille du bateau
+            if self.g.place_ship(type_bateau, ligne, self.g.alphabet[colonne], orientation):
+                # Si le placement est réussi, retirer le type de bateau de la liste
+                types_bateaux.remove(type_bateau)
+            else:
+                print("Placement impossible. Veuillez réessayer.")
+
+        print("Tous les bateaux ont été placés !")
