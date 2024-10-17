@@ -21,7 +21,7 @@ def main():
     while player1.types_bateaux:
         
         os.system('cls||clear')
-        print("Joueur 1 \n\n   Grille du Joueur 1 \n-----------------------")
+        #print("Joueur 1 \n\n   Grille du Joueur 1 \n-----------------------")
         #player1.g.place_ship('contre-torpilleur', 1, 'A', 'V')
         #player1.g.place_ship('croiseur', 1, 'B', 'V')
         #player1.g.place_ship('porte-avions', 1, 'C', 'V')
@@ -56,8 +56,15 @@ def main():
                 time.sleep(heure)
                 os.system('cls||clear')
 
-                print("Joueur 1 \n\n   Grille du Joeur 2 \n-----------------------")
+                print("Joueur 1 \n\n   Grille du Joueur 2 \n-----------------------")
 
+                win = player1.win_check(bot.g)
+                if win:
+                    print(f"{player1.name} a gagné")
+                    break
+                else:
+                    print("Tour suivant")
+                    player_placement = 2
                 
                 #player1.g.display_grid(player1.g.data)
                 player1.g.display_grid(bot.g.data_used)
@@ -82,18 +89,20 @@ def main():
                     time.sleep(heure)
                     continue
                 
-                win = player1.win_check(bot.g)
-                if win:
-                    print(f"{player1.name} a gagné")
-                    break
-                else:
-                    print("Tour suivant")
-                    player_placement = 2
+                
             
             elif(player_placement == 2):
                 time.sleep(heure)
                 os.system('cls||clear')
                 print("Joueur 2 \n\n   Grille du Joueur 1 \n-----------------------")
+
+                win = bot.win_check(player1.g)
+                if win:
+                    print(f"{bot.name} a gagné")
+                    break
+                else:
+                    print("Tour suivant")
+                    player_placement = 1
 
                 #player1.g.display_grid(player2.g.data)
                 bot.g.display_grid(player1.g.data_used)
@@ -118,13 +127,7 @@ def main():
                     time.sleep(heure)
                     continue
 
-                win = bot.win_check(player1.g)
-                if win:
-                    print(f"{bot.name} a gagné")
-                    break
-                else:
-                    print("Tour suivant")
-                    player_placement = 1
+                
             else:
                 print("Code error 404: player_placement not found")
         
@@ -134,6 +137,14 @@ def main():
                 os.system('cls||clear')
                 print("Joueur 1 \n\n   Grille du Joueur 2 \n-----------------------")
 
+
+                win = player1.win_check(player2.g)
+                if win:
+                    print(f"{player1.name} a gagné")
+                    break
+                else:
+                    print("Tour suivant")
+                    player_placement = 2
                 
                 #player1.g.display_grid(player1.g.data)
                 player1.g.display_grid(player2.g.data_used)
@@ -157,19 +168,20 @@ def main():
                     time.sleep(heure)
                     continue
                 
-                win = player1.win_check(player2.g)
-                if win:
-                    print(f"{player1.name} a gagné")
-                    break
-                else:
-                    print("Tour suivant")
-                    player_placement = 2
+                
             
             elif(player_placement == 2):
                 time.sleep(heure)
                 os.system('cls||clear')
                 print("Joueur 2 \n\n   Grille du Joueur 1 \n-----------------------")
- 
+
+                win = player2.win_check(player1.g)
+                if win:
+                    print(f"{player2.name} a gagné")
+                    break
+                else:
+                    print("Tour suivant")
+                    player_placement = 1
                 
                 #player1.g.display_grid(player2.g.data)
                 player2.g.display_grid(player1.g.data_used)
@@ -194,13 +206,7 @@ def main():
                     time.sleep(heure)
                     continue
 
-                win = player2.win_check(player1.g)
-                if win:
-                    print(f"{player2.name} a gagné")
-                    break
-                else:
-                    print("Tour suivant")
-                    player_placement = 1
+               
             else:
                 print("Code error 404: player_placement not found")
         else:

@@ -131,12 +131,15 @@ class Player:
         ---------
             
         """
-        for i in enemy_grid.data:
+        point_ship = 0
+        for i in enemy_grid.data_used:
             for j in i:
                 if j == 1: # 1 signifie le ship
-                    return False
-        return True # Gagné
-
+                    point_ship += 1
+        if point_ship > 16:
+            return True # Gagné
+        else:
+            return False
     def set_ship_ai(self):
         """
         Place aléatoirement les bateaux sur la grille.
