@@ -8,10 +8,10 @@ class AI:
 
         Paramètres:
         -----------
-            None
+            name (string): Nom du bot
 
         Retourne:
-        --------
+        ---------
             None
         """
         self.g = Grid(10)
@@ -26,10 +26,10 @@ class AI:
 
         Paramètres:
         -----------
-            None
+            data (list[10][10])
 
         Retourne:
-        --------
+        ---------
             None
         """
         i = 1 # Incrémentation des colonnes
@@ -56,10 +56,12 @@ class AI:
         """
         Place aléatoirement les bateaux sur la grille.
 
-        Args:
-            self: Instance de la classe contenant la grille.
+        Paramètres:
+        -----------
+           None
 
-        Returns:
+        Retourne:
+        ----------
             bool: True si tous les bateaux ont été placés avec succès.
         """
         self.types_bateaux = list(self.g.ship_sizes.keys())
@@ -154,8 +156,8 @@ class AI:
             enemy_grid (Grid): La grille de l'adversaire.
 
         Retourne:
-            bool: True si la partie est gagné, False si la partie continue.
         ---------
+            bool: True si la partie est gagné, False si la partie continue.
             
         """
         point_ship = 0

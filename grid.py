@@ -27,7 +27,7 @@ class Grid:
             None
 
         Retourne:
-        --------
+        ---------
             None
         """
         i = 1 # Incrémentation des colonnes

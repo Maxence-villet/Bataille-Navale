@@ -127,8 +127,8 @@ class Player:
             enemy_grid (Grid): La grille de l'adversaire.
 
         Retourne:
-            bool: True si la partie est gagné, False si la partie continue.
         ---------
+            bool: True si la partie est gagné, False si la partie continue.
             
         """
         point_ship = 0
@@ -144,10 +144,12 @@ class Player:
         """
         Place aléatoirement les bateaux sur la grille.
 
-        Args:
-            self: Instance de la classe contenant la grille.
+        Paramètres:
+        -----------
+            None
 
-        Returns:
+        Retourne:
+        ---------
             bool: True si tous les bateaux ont été placés avec succès.
         """
         self.types_bateaux = list(self.g.ship_sizes.keys())
