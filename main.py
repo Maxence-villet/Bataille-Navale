@@ -12,12 +12,12 @@ def main():
     bot = AI("Bot")
     #verification_enemie_type_bot = 0
     #verification_enemie_type_player = 0
-    enemie_type = 0 # 0 -> Bot & 1 -> Player
 
     heure = 0.1
     bot.set_ship_ai()
  
 
+    enemie_type = 1 # 0 -> Bot & 1 -> Player
     
     while player1.types_bateaux:
         
@@ -29,16 +29,13 @@ def main():
         #player1.g.place_ship('torpilleur', 1, 'D', 'V')
         #player1.g.place_ship('sous-marin', 1, 'E', 'V')
         #player1.g.display_grid(player1.g.data)
-        
-        player1.set_ship_ai()
-        break
-        
-        #player1.set_ship()
-        #time.sleep(heure)
+        #player1.set_ship_ai()
+        player1.set_ship()
+        time.sleep(heure)
 
-    if enemie_type ==1:
+    if enemie_type == 1:
         while player2.types_bateaux:
-            #os.system('cls||clear')
+            os.system('cls||clear')
             #print("Joueur 2 \n\n   Grille du Joueur 2 \n-----------------------")
             #player2.g.place_ship('contre-torpilleur', 1, 'A', 'V')
             #player2.g.place_ship('croiseur', 2, 'A', 'V')
@@ -46,16 +43,13 @@ def main():
             #player2.g.place_ship('torpilleur', 4, 'A', 'V')
             #player2.g.place_ship('sous-marin', 5, 'A', 'V')
             #player2.g.display_grid(player2.g.data)
-            
-            #player2.set_ship_ai()
             #break
-            
             player2.set_ship() 
             time.sleep(heure)  
 
     
-    player_placement = 1 # nombre du tour
-
+    player_placement = 1 # nombre de tour
+    
     while True:
         
         if enemie_type == 0: # Bot
