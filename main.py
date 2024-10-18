@@ -1,222 +1,186 @@
-from grid import Grid
-import time
-import os
-from player import Player
-from ai import AI
+from grid import Grid;
+import random
 
-def main():
-    
-    #g.place_ship('contre-torpilleur', 9, 2, 'V')
-    player1 = Player("Player 1")
-    player2 = Player("Player 2")
-    bot = AI("Bot")
-    #verification_enemie_type_bot = 0
-    #verification_enemie_type_player = 0
+class Player:
+    def __init__(self, name):
+        """
+        Constructeur de la classe Grid.
 
-    heure = 0.1
-    bot.set_ship_ai()
- 
+        Paramètres:
+        -----------
+            None
 
-    enemie_type = 1 # 0 -> Bot & 1 -> Player
-    
-    while player1.types_bateaux:
-        
-        os.system('cls||clear')
-        #print("Joueur 1 \n\n   Grille du Joueur 1 \n-----------------------")
-        #player1.g.place_ship('contre-torpilleur', 1, 'A', 'V')
-        #player1.g.place_ship('croiseur', 1, 'B', 'V')
-        #player1.g.place_ship('porte-avions', 1, 'C', 'V')
-        #player1.g.place_ship('torpilleur', 1, 'D', 'V')
-        #player1.g.place_ship('sous-marin', 1, 'E', 'V')
-        #player1.g.display_grid(player1.g.data)
-        #player1.set_ship_ai()
-        player1.set_ship()
-        time.sleep(heure)
-
-    if enemie_type == 1:
-        while player2.types_bateaux:
-            os.system('cls||clear')
-            #print("Joueur 2 \n\n   Grille du Joueur 2 \n-----------------------")
-            #player2.g.place_ship('contre-torpilleur', 1, 'A', 'V')
-            #player2.g.place_ship('croiseur', 2, 'A', 'V')
-            #player2.g.place_ship('porte-avions', 3, 'A', 'V')
-            #player2.g.place_ship('torpilleur', 4, 'A', 'V')
-            #player2.g.place_ship('sous-marin', 5, 'A', 'V')
-            #player2.g.display_grid(player2.g.data)
-            #break
-            player2.set_ship() 
-            time.sleep(heure)  
-
-    
-    player_placement = 1 # nombre de tour
-    
-    while True:
-        
-        if enemie_type == 0: # Bot
-            if(player_placement == 1):
-                time.sleep(heure)
-                os.system('cls||clear')
-
-                print("Joueur 1 \n\n   Grille du Joueur 2 \n-----------------------")
-
-                win = player1.win_check(bot.g)
-                if win:
-                    print(f"{player1.name} a gagné")
-                    break
-                else:
-                    print("Tour suivant")
-                    player_placement = 2
-                
-                #player1.g.display_grid(player1.g.data)
-                player1.g.display_grid(bot.g.data_used)
-                print("-----------------------")
-                status = bot.attack_enemie(player1.g, enemie_type)
-
-                if(status == "AGAIN"):
-                    continue
-                elif(status == "coulé"):
-                    #enemie_type = verification_enemie_type_player
-                    print("Le missile est tombé dans l'eau...")
-                elif(status == "Touché"):
-                    #enemie_type = verification_enemie_type_player
-                    print("Le missile a touché un bateau !")
-                elif(status == "ERROR"):
-                    #enemie_type = verification_enemie_type_player
-                    print("veuillez vérifier la bonne combinaison")
-                    time.sleep(heure)
-                    continue
-                else:
-                    print("code error 404: status not found")
-                    time.sleep(heure)
-                    continue
-                
-                
-            
-            elif(player_placement == 2):
-                time.sleep(heure)
-                os.system('cls||clear')
-                print("Joueur 2 \n\n   Grille du Joueur 1 \n-----------------------")
-
-                win = bot.win_check(player1.g)
-                if win:
-                    print(f"{bot.name} a gagné")
-                    break
-                else:
-                    print("Tour suivant")
-                    player_placement = 1
-
-                #player1.g.display_grid(player2.g.data)
-                bot.g.display_grid(player1.g.data_used)
-                print("-----------------------")
-                status = player1.attack_enemie(bot.g, enemie_type)
-                if(status == "AGAIN"):
-                    print("Vous avez déjà séléctionné cette case")
-                    continue
-                elif(status == "coulé"):
-                    #enemie_type = verification_enemie_type_player
-                    print("Le missile est tombé dans l'eau...")
-                elif(status == "Touché"):
-                    #enemie_type = verification_enemie_type_player
-                    print("Le missile a touché un bateau !")
-                elif(status == "ERROR"):
-                    #enemie_type = verification_enemie_type_player
-                    print("veuillez vérifier la bonne combinaison")
-                    time.sleep(heure)
-                    continue
-                else:
-                    print("code error 404: status not found")
-                    time.sleep(heure)
-                    continue
-
-                
-            else:
-                print("Code error 404: player_placement not found")
-        
-        elif enemie_type == 1: # Player
-            if(player_placement == 1):
-                time.sleep(heure)
-                os.system('cls||clear')
-                print("Joueur 1 \n\n   Grille du Joueur 2 \n-----------------------")
+        Retourne:
+        ---------
+            None
+        """
+        self.g = Grid(10)
+        self.ships_type = self.g.get_ships
+        self.types_bateaux = list(self.g.ship_sizes.keys())
+        self.name = name
+        self.placed_ships = []
 
 
-                win = player1.win_check(player2.g)
-                if win:
-                    print(f"{player1.name} a gagné")
-                    break
-                else:
-                    print("Tour suivant")
-                    player_placement = 2
-                
-                #player1.g.display_grid(player1.g.data)
-                player1.g.display_grid(player2.g.data_used)
-                print("-----------------------")
-                status = player2.attack_enemie(player1.g, enemie_type)
-                if(status == "AGAIN"):
-                    continue
-                elif(status == "coulé"):
-                    #enemie_type = verification_enemie_type_bot
-                    print("Le missile est tombé dans l'eau...")
-                elif(status == "Touché"):
-                    #enemie_type = verification_enemie_type_bot
-                    print("Le missile a touché un bateau !")
-                elif(status == "ERROR"):
-                    #enemie_type = verification_enemie_type_bot
-                    print("veuillez vérifier la bonne combinaison")
-                    time.sleep(heure)
-                    continue
-                else:
-                    print("code error 404: status not found")
-                    time.sleep(heure)
-                    continue
-                
-                
-            
-            elif(player_placement == 2):
-                time.sleep(heure)
-                os.system('cls||clear')
-                print("Joueur 2 \n\n   Grille du Joueur 1 \n-----------------------")
 
-                win = player2.win_check(player1.g)
-                if win:
-                    print(f"{player2.name} a gagné")
-                    break
-                else:
-                    print("Tour suivant")
-                    player_placement = 1
-                
-                #player1.g.display_grid(player2.g.data)
-                player2.g.display_grid(player1.g.data_used)
-                print("-----------------------")
-                status = player1.attack_enemie(player2.g, enemie_type)
-                if(status == "AGAIN"):
-                    print("Vous avez déjà séléctionné cette case")
-                    continue
-                elif(status == "coulé"):
-                    #enemie_type = verification_enemie_type_bot
-                    print("Le missile est tombé dans l'eau...")
-                elif(status == "Touché"):
-                    #enemie_type = verification_enemie_type_bot
-                    print("Le missile a touché un bateau !")
-                elif(status == "ERROR"):
-                    #enemie_type = verification_enemie_type_bot
-                    print("veuillez vérifier la bonne combinaison")
-                    time.sleep(heure)
-                    continue
-                else:
-                    print("code error 404: status not found")
-                    time.sleep(heure)
-                    continue
+    def set_ship(self):
+        """
+        Permet au joueur de placer les bateaux.
 
-               
-            else:
-                print("Code error 404: player_placement not found")
+        Paramètres:
+        -----------
+            None
+
+        Retourne:
+        ---------
+            bool: False si la position est invalide
+        """
+
+        # Boucle pour placer tous les bateaux
+
+        # Afficher les types de bateaux restants à placer
+        print("Bateaux restants à placer :", self.types_bateaux)
+
+        # Demander au joueur de choisir un type de bateau
+        type_bateau = input("Choisissez un type de bateau à placer : ")
+
+        # Vérifier si le type de bateau est valide
+        if type_bateau not in self.types_bateaux:
+            print("Type de bateau invalide. Veuillez réessayer.")
+            return False
+
+        # Demander les coordonnées et l'orientation du bateau
+        ligne = int(input("Entrez la ligne (numéro) : "))
+        colonne = input("Entrez la colonne (lettre) : ")
+        orientation = input("Entrez l'orientation (horizontale ou verticale) : ")
+
+        # Appeler la fonction place_ship() pour placer le bateau
+        if self.g.place_ship(type_bateau, ligne, colonne, orientation):
+            # Si le placement est réussi, retirer le type de bateau de la liste
+            self.types_bateaux.remove(type_bateau)
         else:
-            print("error 404: Not Found")
-            break
-        
+            print("Placement impossible. Veuillez réessayer.")
 
-        
-        
+    print("Tous les bateaux ont été placés !")
 
-main()
 
+    def attack_enemie(self, enemy_grid:Grid, enemie_type):
+        """
+        Permet au joueur d'attaquer la grille adverse.
+
+        Paramètres:
+        -----------
+            enemy_grid (Grid): La grille de l'adversaire.
+
+        Retourne:
+        ---------
+            string: "Touché" si un bateau a été touché, "coulé" si l'eau est touché et "AGAIN" si le tir est invalid.
+        """
+        if enemie_type == 1:
+            row = int(input("Entrez la ligne (numéro) : "))
+            col_alpha = input("Entrez la colonne (lettre) : ")
+            
+            row -= 1
+
+            if type(col_alpha) == str: # vérification du type string
+                col_alpha = col_alpha.upper()
+                isContainLetter = False
+                for i in self.g.alphabet[0:self.g.size:1]:
+                    if isContainLetter == False:
+                        if col_alpha == i:
+                            isContainLetter = True
+                if isContainLetter == False:
+                    print(f"Vous devez mettre une seule lettre parmi ces lettres : {self.g.alphabet[0:self.g.size:1]}")
+                    return "ERROR"
+                else:
+                    col = self.g.convert_alphabet_to_int(col_alpha)
+        else:
+            row = random.randint(1, self.g.size)
+            col = random.randint(1, self.g.size)
+
+            col -= 1
+            row -= 2
+        
+        if type(row) == int and row <= self.g.size:   # vérification nombre compris entre 1 et la size de la grille
+
+
+            if self.g.data_used[row][col] > 0: # case déjà touchée
+                    return "AGAIN"
+            else:
+                self.g.data_used[row][col] = enemy_grid.data[row][col] # ajouter un point dans la case cachée
+
+            if enemy_grid.data[row][col] == 1: # bateau touchée
+                self.g.data_used[row][col] = self.g.data_used[row][col]
+                return "Touché"
+            else:
+                self.g.data_used[row][col] = self.g.data_used[row][col] + 2 # tir dans l'eau
+                return "coulé"
+        else: #vérification ligne (int)
+            print(f"Vous devez mettre un nombre entre 1 et {self.g.size}")
+            return "ERROR"
+    
+    def win_check(self, enemy_grid:Grid):
+        """
+        Vérification de victoire.
+
+        Paramètres:
+        -----------
+            enemy_grid (Grid): La grille de l'adversaire.
+
+        Retourne:
+            bool: True si la partie est gagné, False si la partie continue.
+        ---------
+            
+        """
+        point_ship = 0
+        for i in enemy_grid.data_used:
+            for j in i:
+                if j == 1: # 1 signifie le ship
+                    point_ship += 1
+        if point_ship > 16:
+            return True # Gagné
+        else:
+            return False
+    def set_ship_ai(self):
+        """
+        Place aléatoirement les bateaux sur la grille.
+
+        Args:
+            self: Instance de la classe contenant la grille.
+
+        Returns:
+            bool: True si tous les bateaux ont été placés avec succès.
+        """
+        self.types_bateaux = list(self.g.ship_sizes.keys())
+
+        # Liste des types de bateaux (à partir des clés du dictionnaire)
+        types_bateaux = list(self.g.ship_sizes.keys())
+
+        # Boucle pour placer tous les bateaux
+        while types_bateaux:
+            # Afficher les types de bateaux restants à placer
+            print("Bateaux restants à placer :", types_bateaux)
+
+            # Demander au joueur de choisir un type de bateau
+            type_bateau = random.choice(list(self.g.ship_sizes.keys()))
+
+            # Vérifier si le type de bateau est valide
+            if type_bateau not in types_bateaux:
+                print("Type de bateau invalide. Veuillez réessayer.")
+                continue
+
+            # Récupérer la taille du bateau à partir du dictionnaire
+            taille_bateau = random.choice(list(self.g.ship_sizes.keys()))
+
+            # Demander les coordonnées et l'orientation du bateau
+            ligne = random.randint(1, self.g.size)
+            colonne = random.randint(0, self.g.size-1)
+            orientation = random.choice(['V', 'H'])
+
+            # Appeler la fonction place_ship() en passant la taille du bateau
+            if self.g.place_ship(type_bateau, ligne, self.g.alphabet[colonne], orientation):
+                # Si le placement est réussi, retirer le type de bateau de la liste
+                types_bateaux.remove(type_bateau)
+            else:
+                print("Placement impossible. Veuillez réessayer.")
+
+        print("Tous les bateaux ont été placés !")
