@@ -125,6 +125,7 @@ class AI:
                     return "ERROR"
                 else:
                     col = self.g.convert_alphabet_to_int(col_alpha)
+                
         else:
             row = random.randint(1, self.g.size)
             col = random.randint(1, self.g.size)

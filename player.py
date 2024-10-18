@@ -79,7 +79,7 @@ class Player:
             row = int(input("Entrez la ligne (numéro) : "))
             col_alpha = input("Entrez la colonne (lettre) : ")
             
-
+            row -= 1
 
             if type(col_alpha) == str: # vérification du type string
                 col_alpha = col_alpha.upper()

@@ -10,10 +10,11 @@ def main():
     player1 = Player("Player 1")
     player2 = Player("Player 2")
     bot = AI("Bot")
-    verification_enemie_type_bot = 0
-    verification_enemie_type_player = 0
+    #verification_enemie_type_bot = 0
+    #verification_enemie_type_player = 0
+    enemie_type = 0 # 0 -> Bot & 1 -> Player
 
-    heure = 0.1
+    heure = 0.25
     bot.set_ship_ai()
  
 
@@ -28,27 +29,33 @@ def main():
         #player1.g.place_ship('torpilleur', 1, 'D', 'V')
         #player1.g.place_ship('sous-marin', 1, 'E', 'V')
         #player1.g.display_grid(player1.g.data)
-        player1.set_ship_ai()
-        break
-        #player1.set_ship()
-        #time.sleep(heure)
+        
+        #player1.set_ship_ai()
+        #break
+        
+        player1.set_ship()
+        time.sleep(heure)
 
-    while player2.types_bateaux:
-        #os.system('cls||clear')
-        #print("Joueur 2 \n\n   Grille du Joueur 2 \n-----------------------")
-        #player2.g.place_ship('contre-torpilleur', 1, 'A', 'V')
-        #player2.g.place_ship('croiseur', 2, 'A', 'V')
-        #player2.g.place_ship('porte-avions', 3, 'A', 'V')
-        #player2.g.place_ship('torpilleur', 4, 'A', 'V')
-        #player2.g.place_ship('sous-marin', 5, 'A', 'V')
-        #player2.g.display_grid(player2.g.data)
-        break
-        #player2.set_ship() 
-        #time.sleep(heure)  
+    if enemie_type ==1:
+        while player2.types_bateaux:
+            #os.system('cls||clear')
+            #print("Joueur 2 \n\n   Grille du Joueur 2 \n-----------------------")
+            #player2.g.place_ship('contre-torpilleur', 1, 'A', 'V')
+            #player2.g.place_ship('croiseur', 2, 'A', 'V')
+            #player2.g.place_ship('porte-avions', 3, 'A', 'V')
+            #player2.g.place_ship('torpilleur', 4, 'A', 'V')
+            #player2.g.place_ship('sous-marin', 5, 'A', 'V')
+            #player2.g.display_grid(player2.g.data)
+            
+            #player2.set_ship_ai()
+            #break
+            
+            player2.set_ship() 
+            time.sleep(heure)  
 
     
-    player_placement = 1 # nombre de tour
-    enemie_type = 0 # 0 -> Bot & 1 -> Player
+    player_placement = 1 # nombre du tour
+
     while True:
         
         if enemie_type == 0: # Bot
@@ -74,13 +81,13 @@ def main():
                 if(status == "AGAIN"):
                     continue
                 elif(status == "coulé"):
-                    enemie_type = verification_enemie_type_player
+                    #enemie_type = verification_enemie_type_player
                     print("Le missile est tombé dans l'eau...")
                 elif(status == "Touché"):
-                    enemie_type = verification_enemie_type_player
+                    #enemie_type = verification_enemie_type_player
                     print("Le missile a touché un bateau !")
                 elif(status == "ERROR"):
-                    enemie_type = verification_enemie_type_player
+                    #enemie_type = verification_enemie_type_player
                     print("veuillez vérifier la bonne combinaison")
                     time.sleep(heure)
                     continue
@@ -112,13 +119,13 @@ def main():
                     print("Vous avez déjà séléctionné cette case")
                     continue
                 elif(status == "coulé"):
-                    enemie_type = verification_enemie_type_player
+                    #enemie_type = verification_enemie_type_player
                     print("Le missile est tombé dans l'eau...")
                 elif(status == "Touché"):
-                    enemie_type = verification_enemie_type_player
+                    #enemie_type = verification_enemie_type_player
                     print("Le missile a touché un bateau !")
                 elif(status == "ERROR"):
-                    enemie_type = verification_enemie_type_player
+                    #enemie_type = verification_enemie_type_player
                     print("veuillez vérifier la bonne combinaison")
                     time.sleep(heure)
                     continue
@@ -153,13 +160,13 @@ def main():
                 if(status == "AGAIN"):
                     continue
                 elif(status == "coulé"):
-                    enemie_type = verification_enemie_type_bot
+                    #enemie_type = verification_enemie_type_bot
                     print("Le missile est tombé dans l'eau...")
                 elif(status == "Touché"):
-                    enemie_type = verification_enemie_type_bot
+                    #enemie_type = verification_enemie_type_bot
                     print("Le missile a touché un bateau !")
                 elif(status == "ERROR"):
-                    enemie_type = verification_enemie_type_bot
+                    #enemie_type = verification_enemie_type_bot
                     print("veuillez vérifier la bonne combinaison")
                     time.sleep(heure)
                     continue
@@ -191,13 +198,13 @@ def main():
                     print("Vous avez déjà séléctionné cette case")
                     continue
                 elif(status == "coulé"):
-                    enemie_type = verification_enemie_type_bot
+                    #enemie_type = verification_enemie_type_bot
                     print("Le missile est tombé dans l'eau...")
                 elif(status == "Touché"):
-                    enemie_type = verification_enemie_type_bot
+                    #enemie_type = verification_enemie_type_bot
                     print("Le missile a touché un bateau !")
                 elif(status == "ERROR"):
-                    enemie_type = verification_enemie_type_bot
+                    #enemie_type = verification_enemie_type_bot
                     print("veuillez vérifier la bonne combinaison")
                     time.sleep(heure)
                     continue
