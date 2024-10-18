@@ -14,6 +14,14 @@ Rappel des règles:
 
 Objectif : Couler tous les bateaux de l’adversaire en touchant toutes les cases de chaque bateau.
 
+## comment installer le projet
+
+```
+git clone https://github.com/Maxence-villet/Bataille-Navale.git
+cd Bataille-Navale
+python3 main.py
+```
+
 ## Taille ajustable
 
 La taille de la grille est ajustable, elle s'ajuste parfaitement grace à la variable size:
@@ -23,3 +31,5 @@ La taille de la grille est ajustable, elle s'ajuste parfaitement grace à la var
 ```
 
 ![alt text](https://github.com/Maxence-villet/Bataille-Navale/blob/main/images/grid-size-10.png)    ![alt text](https://github.com/Maxence-villet/Bataille-Navale/blob/main/images/grid-size-15.png) ![alt text](https://github.com/Maxence-villet/Bataille-Navale/blob/main/images/grid-size-4.png)
+
+

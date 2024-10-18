@@ -14,7 +14,7 @@ def main():
     #verification_enemie_type_player = 0
     enemie_type = 0 # 0 -> Bot & 1 -> Player
 
-    heure = 0.25
+    heure = 0.1
     bot.set_ship_ai()
  
 
@@ -30,11 +30,11 @@ def main():
         #player1.g.place_ship('sous-marin', 1, 'E', 'V')
         #player1.g.display_grid(player1.g.data)
         
-        #player1.set_ship_ai()
-        #break
+        player1.set_ship_ai()
+        break
         
-        player1.set_ship()
-        time.sleep(heure)
+        #player1.set_ship()
+        #time.sleep(heure)
 
     if enemie_type ==1:
         while player2.types_bateaux:
