@@ -2,14 +2,14 @@ from grid import Grid
 import time
 import os
 from player import Player
-from ai import AI
+
 
 def main():
     
     #g.place_ship('contre-torpilleur', 9, 2, 'V')
     player1 = Player("Player 1")
     player2 = Player("Player 2")
-    bot = AI("Bot")
+    bot = Player("Bot")
     #verification_enemie_type_bot = 0
     #verification_enemie_type_player = 0
 
@@ -17,7 +17,7 @@ def main():
     bot.set_ship_ai()
  
 
-    enemie_type = 1 # 0 -> Bot & 1 -> Player
+    enemie_type = 0 # 0 -> Bot & 1 -> Player
     
     while player1.types_bateaux:
         
@@ -29,9 +29,10 @@ def main():
         #player1.g.place_ship('torpilleur', 1, 'D', 'V')
         #player1.g.place_ship('sous-marin', 1, 'E', 'V')
         #player1.g.display_grid(player1.g.data)
-        #player1.set_ship_ai()
-        player1.set_ship()
-        time.sleep(heure)
+        player1.set_ship_ai()
+        #player1.set_ship()
+        #time.sleep(heure)
+        break
 
     if enemie_type == 1:
         while player2.types_bateaux:
